@@ -1,0 +1,5 @@
+# Intellij working directory
+.idea
+
+# Binaries Java
+target
