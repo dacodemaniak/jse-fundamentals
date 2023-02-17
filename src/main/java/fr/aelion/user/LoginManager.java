@@ -21,12 +21,21 @@ public class LoginManager {
         return password;
     }
 
+    public StudentRepository getStudentRepository() {
+        return this.studentRepository;
+    }
     public String login() {
         if (this.login.equals(null) || this.password.equals(null)) {
             return "403 Forbidden";
         }
-        return this.studentRepository.findByLoginAndPassword(this.login, this.password) ? "200 Ok" : "404 Not Found";
 
+        Student student = this.studentRepository.findByLoginAndPassword(this.login, this.password);
+        if ( student instanceof Student ) {
+            student.isLoggedIn(true);
+            return "200 Ok";
+        }
+
+        return "404 Not Found";
         /**
          * if (this.studentRepository.findByLoginAndPassword(this.login, this.password)) {
          *  return "200 Ok"
@@ -35,5 +44,10 @@ public class LoginManager {
          */
     }
 
-    public void logout() {}
+    public void logout() {
+        Student student = this.studentRepository.findByLoginAndPassword(this.login, this.password);
+        if ( student instanceof Student ) {
+            student.isLoggedIn(false);
+        }
+    }
 }
