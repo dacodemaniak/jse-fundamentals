@@ -20,4 +20,17 @@ public class LoginManagerTest {
                 () -> assertEquals("007", this.loginManager.getPassword())
         );
     }
+
+    @Test
+    @DisplayName("Should return 200 Ok if credentials was good")
+    public void goodCredentials() {
+        assertEquals("200 Ok", this.loginManager.login());
+    }
+
+    @Test
+    @DisplayName("Should return 404 Not Found if bad credentials")
+    public void badCredentials() {
+        LoginManager loginManager = new LoginManager("toto", "tata");
+        assertEquals("404 Not Found", loginManager.login());
+    }
 }
