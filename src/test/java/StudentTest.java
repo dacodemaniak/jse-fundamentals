@@ -17,8 +17,8 @@ public class StudentTest {
     @DisplayName("Standared properties should be 'Aubert', 'Jean-Luc', 'jean-luc.aubert@aelion.fr")
     void testStdProperties() {
         assertAll("Aubert Jean-Luc jean-luc.aubert@aelion.fr",
-                () -> assertEquals("Aubert", student.lastName),
-                () -> assertEquals("Jean-Luc", student.firstName),
+                () -> assertEquals("Aubert", student.getLastName()),
+                () -> assertEquals("Jean-Luc", student.getFirstName()),
                 () -> assertEquals("jean-luc.aubert@aelion.fr", student.getEmail())
         );
     }
@@ -27,15 +27,8 @@ public class StudentTest {
     @DisplayName("Student should have 'Casper' as lastName")
     void testPublicAttribute() {
         Student student = new Student("Tartempion", "Jules", "jt@test.com");
-        student.lastName = "Casper";
-        assertEquals("Casper", student.lastName);
-    }
-
-    @Test
-    @DisplayName("Student should not have 'anonymous' as email")
-    void testEmail() {
-        Student student = new Student("Tartempion", "Jules", "jt@test.com");
-        assertEquals(false, student.setEmail("anonymous"));
+        student.setLastName("Casper");
+        assertEquals("Casper", student.getLastName());
     }
 
 }

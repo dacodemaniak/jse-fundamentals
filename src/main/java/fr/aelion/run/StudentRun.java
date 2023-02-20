@@ -12,7 +12,7 @@ public class StudentRun {
         // Try to log with correct credentials
         if (!student.isLoggedIn()) {
             if (student.login("jlaubert", "dacodemaniak")) {
-                System.out.println("Bonjour " + student.firstName + " " + student.lastName);
+                System.out.println("Bonjour " + student.getFirstName() + " " + student.getLastName());
             } else {
                 System.out.println("Désolé, mais aucun utilisateur ne correspond à vos identifiants");
             }

@@ -1,10 +1,6 @@
 package fr.aelion.models;
 
-public class Student {
-    public String lastName;
-    public String firstName;
-
-    private String email;
+public class Student extends Person {
 
     private String username;
     private String password;
@@ -25,16 +21,11 @@ public class Student {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public boolean setEmail(String email) {
+    @Override
+    public void setEmail(String email) {
         if (email.contains("@")) {
             this.email = email;
-            return true;
         }
-        return false;
     }
 
     public String getUsername() {
