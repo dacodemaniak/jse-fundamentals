@@ -29,6 +29,14 @@ public class Student {
         return email;
     }
 
+    public boolean setEmail(String email) {
+        if (email.contains("@")) {
+            this.email = email;
+            return true;
+        }
+        return false;
+    }
+
     public String getUsername() {
         return username;
     }

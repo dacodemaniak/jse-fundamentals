@@ -23,4 +23,19 @@ public class StudentTest {
         );
     }
 
+    @Test
+    @DisplayName("Student should have 'Casper' as lastName")
+    void testPublicAttribute() {
+        Student student = new Student("Tartempion", "Jules", "jt@test.com");
+        student.lastName = "Casper";
+        assertEquals("Casper", student.lastName);
+    }
+
+    @Test
+    @DisplayName("Student should not have 'anonymous' as email")
+    void testEmail() {
+        Student student = new Student("Tartempion", "Jules", "jt@test.com");
+        assertEquals(false, student.setEmail("anonymous"));
+    }
+
 }
