@@ -16,10 +16,12 @@ public class StudentTest {
     @Test
     @DisplayName("Standared properties should be 'Aubert', 'Jean-Luc', 'jean-luc.aubert@aelion.fr")
     void testStdProperties() {
+        student.setPhoneNumber("06 55 21 54 87");
         assertAll("Aubert Jean-Luc jean-luc.aubert@aelion.fr",
                 () -> assertEquals("Aubert", student.getLastName()),
                 () -> assertEquals("Jean-Luc", student.getFirstName()),
-                () -> assertEquals("jean-luc.aubert@aelion.fr", student.getEmail())
+                () -> assertEquals("jean-luc.aubert@aelion.fr", student.getEmail()),
+                () -> assertEquals("06 55 21 54 87", student.getPhoneNumber())
         );
     }
 
