@@ -1,6 +1,24 @@
 package fr.aelion.models;
 
 public class Person {
+
+    protected String lastName;
+    protected String firstName;
+    protected String phoneNumber;
+    protected String email;
+
+    public Person() {}
+    public Person(String lastName, String email) {
+        this.lastName = lastName;
+        this.email = email;
+    }
+    public Person(String lastName, String firstName, String phoneNumber, String email) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -33,22 +51,6 @@ public class Person {
         this.email = email;
     }
 
-    private String lastName;
-    private String firstName;
-    private String phoneNumber;
-    private String email;
-
-    public Person() {}
-    public Person(String lastName, String email) {
-        this.lastName = lastName;
-        this.email = email;
-    }
-    public Person(String lastName, String firstName, String phoneNumber, String email) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
     public String greetings() {
         return this.firstName + " " + this.lastName.toUpperCase();
     }
