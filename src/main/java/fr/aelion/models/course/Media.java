@@ -4,7 +4,7 @@ public abstract class Media {
     protected String title;
     protected String summary;
     protected Float duration;
-    // @todo Create class Author and move type to
+
     protected Author author;
 
     public String getTitle() {
