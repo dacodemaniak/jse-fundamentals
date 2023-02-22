@@ -3,7 +3,7 @@ package fr.aelion.helpers;
 import fr.aelion.helpers.interfaces.Builder;
 import fr.aelion.models.course.*;
 
-import javax.swing.text.html.Option;
+
 import java.util.Optional;
 
 public class MediaBuilder implements Builder<Media> {
@@ -38,11 +38,15 @@ public class MediaBuilder implements Builder<Media> {
         return this;
     }
     @Override
-    public Optional<Media> build() {
+    public Media build() throws Exception {
 
         // Hey Buddy, what if no title or duration ?
         if (this.title == null || this.duration == null) {
-            return Optional.empty();
+            throw new Exception("title or duration is missing, unable to create Media");
+        }
+
+        if (this.mediaType == null) {
+            throw new Exception("Media type is null, cannot create Media");
         }
 
         Media media;
@@ -67,6 +71,6 @@ public class MediaBuilder implements Builder<Media> {
         media.setDuration(this.duration);
         media.setAuthor(this.author);
 
-        return Optional.of(media);
+        return media;
     }
 }
