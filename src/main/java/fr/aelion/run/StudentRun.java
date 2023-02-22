@@ -8,7 +8,7 @@ import fr.aelion.models.Student;
 public class StudentRun {
     public void run() {
         try {
-            Student student = ((StudentBuilder) new StudentBuilder())
+            Student student = ((StudentBuilder) StudentBuilder.getInstance())
                     .lastName("Aubert")
                     .firstName("Jean-Luc")
                     .phoneNumber("06 55 22 33 66")

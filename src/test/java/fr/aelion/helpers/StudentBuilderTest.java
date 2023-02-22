@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StudentBuilderTest {
 
-    private StudentBuilder studentBuilder = new StudentBuilder();
+    private StudentBuilder studentBuilder = StudentBuilder.getInstance();
     @BeforeEach
     void setUp() {
         studentBuilder
@@ -31,7 +31,7 @@ class StudentBuilderTest {
     @Test
     @DisplayName("Shoud throw an Exception")
     void noStudent() {
-        StudentBuilder builder = new StudentBuilder();
+        StudentBuilder builder = StudentBuilder.getInstance();
         builder
                 .firstName("Casper")
                 .username("LeFantôme");
@@ -41,7 +41,7 @@ class StudentBuilderTest {
     @Test
     @DisplayName("Should throw an Exception with 'No name was provided'")
     void noNameException() {
-        StudentBuilder builder = new StudentBuilder();
+        StudentBuilder builder = StudentBuilder.getInstance();
         builder
                 .firstName("Casper")
                 .username("LeFantôme")

@@ -1,3 +1,4 @@
+import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 import fr.aelion.repositories.StudentRepository;
 import fr.aelion.user.LoginManager;
@@ -12,7 +13,7 @@ public class LoginManagerTest {
     public LoginManager loginManager;
     public StudentRepository studentRepository;
     @BeforeEach
-    public void setup() {
+    public void setup() throws StudentException {
         this.loginManager = new LoginManager("bond", "007");
         this.studentRepository = loginManager.getStudentRepository();
     }
@@ -33,7 +34,7 @@ public class LoginManagerTest {
 
     @Test
     @DisplayName("Should return 404 Not Found if bad credentials")
-    public void badCredentials() {
+    public void badCredentials() throws StudentException {
         LoginManager loginManager = new LoginManager("toto", "tata");
         assertEquals("404 Not Found", loginManager.login());
     }

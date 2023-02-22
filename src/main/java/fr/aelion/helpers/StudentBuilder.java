@@ -5,6 +5,7 @@ import fr.aelion.helpers.interfaces.Builder;
 import fr.aelion.models.Student;
 
 public class StudentBuilder implements Builder<Student> {
+    private static StudentBuilder instance;
     private String lastName;
     private String firstName;
     private String phoneNumber;
@@ -13,6 +14,22 @@ public class StudentBuilder implements Builder<Student> {
     private String username;
     private String password;
 
+    private StudentBuilder() {}
+
+    public static StudentBuilder getInstance() {
+        if (StudentBuilder.instance == null) {
+            StudentBuilder.instance = new StudentBuilder();
+        } else {
+            StudentBuilder.instance
+                    .email(null)
+                    .password(null)
+                    .username(null)
+                    .lastName(null)
+                    .firstName(null)
+                    .phoneNumber(null);
+        }
+        return StudentBuilder.instance;
+    }
     public StudentBuilder lastName(String lastName) {
         this.lastName = lastName;
         return this;

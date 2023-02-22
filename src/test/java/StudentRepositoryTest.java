@@ -1,3 +1,4 @@
+import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.repositories.StudentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StudentRepositoryTest {
     StudentRepository studentRepository;
     @BeforeEach
-    public void setup() {
+    public void setup() throws StudentException {
         studentRepository = new StudentRepository();
     }
 

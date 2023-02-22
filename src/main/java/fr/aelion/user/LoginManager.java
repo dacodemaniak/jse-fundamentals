@@ -1,5 +1,6 @@
 package fr.aelion.user;
 
+import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 import fr.aelion.repositories.StudentRepository;
 
@@ -8,7 +9,7 @@ public class LoginManager {
     private String password;
 
     private StudentRepository studentRepository = new StudentRepository();
-    public LoginManager(String login, String password) {
+    public LoginManager(String login, String password) throws StudentException {
         this.login = login;
         this.password = password;
     }
