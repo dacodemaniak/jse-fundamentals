@@ -1,5 +1,7 @@
 package fr.aelion.helpers.factory;
 
+import fr.aelion.helpers.strategies.media.IMediaStrategy;
+import fr.aelion.helpers.strategies.media.VideoMediaStrategy;
 import fr.aelion.models.course.Document;
 import fr.aelion.models.course.Media;
 import fr.aelion.models.course.Slide;
@@ -10,15 +12,18 @@ import java.util.HashMap;
 
 public class MediaFactory {
     private final static String classRoot = "fr.aelion.models.course";
-
+    private String fullClassName = MediaFactory.classRoot;
     public Media getMedia(String mediaType) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String className = mediaType.toLowerCase();
-        className = String.valueOf(mediaType.charAt(0)).toUpperCase() + className.substring(1);
-        return getInstance(className);
+        fullClassName += String.valueOf(mediaType.charAt(0)).toUpperCase() + className.substring(1);
+        return getInstance();
     }
 
-    private Media getInstance(String mediaType) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String className = MediaFactory.classRoot + "." + mediaType;
-        return (Media) Class.forName(className).newInstance();
+    public String getFullClassName() {
+        return this.fullClassName;
+    }
+    private Media getInstance() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        return (Media) Class.forName(fullClassName).newInstance();
     }
 }

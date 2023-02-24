@@ -1,4 +1,4 @@
-package fr.aelion.helpers;
+package fr.aelion.helpers.builders.medias;
 
 import fr.aelion.helpers.exceptions.NoMediaTypeException;
 import fr.aelion.helpers.exceptions.NotEnoughArgsException;
@@ -6,10 +6,7 @@ import fr.aelion.helpers.factory.MediaFactory;
 import fr.aelion.helpers.interfaces.Builder;
 import fr.aelion.models.course.*;
 
-
-import java.util.Optional;
-
-public class MediaBuilder implements Builder<Media> {
+public abstract class MediaBuilder implements Builder<Media> {
     private String title;
     private String summary;
     private Float duration;
@@ -17,8 +14,11 @@ public class MediaBuilder implements Builder<Media> {
 
     private String mediaType;
 
+    private MediaFactory mediaFactory = new MediaFactory();
     public void setMediaType(String mediaType) {
+
         this.mediaType = mediaType;
+
     }
 
     public MediaBuilder title(String title) {
@@ -40,7 +40,6 @@ public class MediaBuilder implements Builder<Media> {
         this.author = author;
         return this;
     }
-    @Override
     public Media build() throws NotEnoughArgsException, NoMediaTypeException {
 
         // Hey Buddy, what if no title or duration ?
@@ -53,8 +52,9 @@ public class MediaBuilder implements Builder<Media> {
         }
 
         Media media = null;
+
         try {
-            media = new MediaFactory().getMedia(this.mediaType);
+            media = mediaFactory.getMedia(this.mediaType);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {
@@ -72,4 +72,5 @@ public class MediaBuilder implements Builder<Media> {
 
         return media;
     }
+
 }

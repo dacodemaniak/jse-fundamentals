@@ -1,5 +1,7 @@
 package fr.aelion.helpers;
 
+import fr.aelion.helpers.builders.medias.MediaBuilder;
+import fr.aelion.helpers.builders.medias.VideoBuilder;
 import fr.aelion.models.course.Author;
 import fr.aelion.models.course.Media;
 import fr.aelion.models.course.Video;
@@ -7,13 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MediaBuilderTest {
-    private MediaBuilder mediaBuilder = new MediaBuilder();
-    private MediaBuilder badBuilder = new MediaBuilder();
+    private MediaBuilder mediaBuilder = new VideoBuilder();
+    private MediaBuilder badBuilder = new VideoBuilder();
     @BeforeEach
     void setUp() {
         mediaBuilder.setMediaType("video");
@@ -84,7 +84,7 @@ class MediaBuilderTest {
     @Test
     @DisplayName("No type should raised an Exception")
     void noType() {
-        MediaBuilder bad = new MediaBuilder();
+        MediaBuilder bad = new VideoBuilder();
         bad
                 .title("Bad")
                 .summary("Bad")

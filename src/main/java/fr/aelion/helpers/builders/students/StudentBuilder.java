@@ -1,4 +1,4 @@
-package fr.aelion.helpers;
+package fr.aelion.helpers.builders.students;
 
 import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.helpers.interfaces.Builder;
@@ -60,7 +60,7 @@ public class StudentBuilder implements Builder<Student> {
         return this;
     }
     @Override
-    public Student build() throws StudentException {
+    public Object build() throws StudentException {
         if (this.lastName == null) {
             throw StudentException.noNameException();
         }

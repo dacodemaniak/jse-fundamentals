@@ -1,6 +1,7 @@
 package fr.aelion.run;
 
-import fr.aelion.helpers.MediaBuilder;
+import fr.aelion.helpers.builders.medias.MediaBuilder;
+import fr.aelion.helpers.builders.medias.VideoBuilder;
 import fr.aelion.helpers.exceptions.NoMediaTypeException;
 import fr.aelion.helpers.exceptions.NotEnoughArgsException;
 import fr.aelion.models.course.Author;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 public class MediaRun {
     private Media video = new Video();
-    private MediaBuilder builder = new MediaBuilder();
+    private MediaBuilder builder = new VideoBuilder();
 
     private Set<Media> medias = new HashSet<>();
     public MediaRun() {
@@ -23,9 +24,12 @@ public class MediaRun {
         builder
                 .summary("Ca marchera pas non plus mais mieux")
                 .author(new Author());
+
+
+
     }
 
-    public void run() {
+    public void run() throws NoMediaTypeException, NotEnoughArgsException {
         medias.add(video);
 
         try {
@@ -35,6 +39,12 @@ public class MediaRun {
         } catch (NotEnoughArgsException e) {
             System.out.println("T'as pas compris comment on fait les objets !");
         }
+
+        builder.setMediaType("sound");
+        builder
+                .title("Hell's Bells")
+                .duration(3.30F);
+        medias.add(builder.build());
 
         medias.forEach(m -> {
             System.out.println(m.getTitle() + " Duration : " + m.getDuration());

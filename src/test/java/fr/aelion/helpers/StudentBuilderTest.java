@@ -1,5 +1,6 @@
 package fr.aelion.helpers;
 
+import fr.aelion.helpers.builders.students.StudentBuilder;
 import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +49,7 @@ class StudentBuilderTest {
                 .password("whoooooo")
                 .email("casper@lefantome.com");
         try {
-            Student student = builder.build();
+            Student student = (Student) builder.build();
         } catch (StudentException e) {
             assertEquals("No Name was provided", e.getMessage());
         }

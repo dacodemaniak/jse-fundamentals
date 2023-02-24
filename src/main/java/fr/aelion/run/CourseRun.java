@@ -1,6 +1,7 @@
 package fr.aelion.run;
 
-import fr.aelion.helpers.MediaBuilder;
+import fr.aelion.helpers.builders.medias.MediaBuilder;
+import fr.aelion.helpers.builders.medias.VideoBuilder;
 import fr.aelion.helpers.exceptions.NoMediaTypeException;
 import fr.aelion.helpers.exceptions.NotEnoughArgsException;
 import fr.aelion.models.course.*;
@@ -22,7 +23,7 @@ public class CourseRun {
     }
     private void makeCourse() {
 
-        MediaBuilder videoBuilder = new MediaBuilder();
+        MediaBuilder videoBuilder = new VideoBuilder();
         videoBuilder.setMediaType("video");
         videoBuilder
                 .title("Create Table")
@@ -30,7 +31,7 @@ public class CourseRun {
                 .duration(5.35F)
                 .author(new Author());
 
-        MediaBuilder slideBuilder = new MediaBuilder();
+        MediaBuilder slideBuilder = new VideoBuilder();
         slideBuilder.setMediaType("slide");
         slideBuilder
                 .title("Alter table")
@@ -38,7 +39,7 @@ public class CourseRun {
                 .duration(3.30F)
                 .author(new Author());
 
-        MediaBuilder docBuilder = new MediaBuilder();
+        MediaBuilder docBuilder = new VideoBuilder();
         docBuilder.setMediaType("document");
         docBuilder
                 .title("Drop table")
@@ -46,7 +47,7 @@ public class CourseRun {
                 .duration(1.10F)
                 .author(new Author());
 
-        MediaBuilder badBuilder = new MediaBuilder();
+        MediaBuilder badBuilder = new VideoBuilder();
         badBuilder
                 .title("Not in the list")
                 .duration(0.10F);

@@ -1,6 +1,6 @@
 package fr.aelion.repositories;
 
-import fr.aelion.helpers.StudentBuilder;
+import fr.aelion.helpers.builders.students.StudentBuilder;
 import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 
@@ -35,7 +35,7 @@ public class StudentRepository {
                 .password("truc")
                 .username("truc");
 
-        this.students.add(builder.build());
+        this.students.add((Student) builder.build());
 
         builder = StudentBuilder.getInstance();
         builder
