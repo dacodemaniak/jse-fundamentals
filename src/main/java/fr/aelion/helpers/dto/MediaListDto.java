@@ -15,11 +15,7 @@ public class MediaListDto {
     public Float duration;
 
     /**
-     * Transform a Media Object to a MediaListDto object
-     * @param media Media to deserialize to MediaListDto
+     * Summary
      */
-    public void deserialize(Media media) {
-        this.title = media.getTitle();
-        this.duration = media.getDuration();
-    }
+    public String summary;
 }
