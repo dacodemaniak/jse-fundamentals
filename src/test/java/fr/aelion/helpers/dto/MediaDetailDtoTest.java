@@ -5,6 +5,8 @@ import fr.aelion.models.course.Video;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MediaDetailDtoTest {
@@ -23,8 +25,9 @@ class MediaDetailDtoTest {
     }
 
     @Test
-    void deserialize() {
-        dto.deserialize(video);
+    void deserialize() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        DtoMapper mapper = new DtoMapper();
+        dto = (MediaDetailDto) mapper.map(video, dto);
         assertAll(
                 () -> assertEquals(video.getTitle(), dto.title),
                 () -> assertEquals(video.getDuration(), dto.duration),

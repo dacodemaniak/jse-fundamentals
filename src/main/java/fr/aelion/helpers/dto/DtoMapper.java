@@ -1,11 +1,11 @@
 package fr.aelion.helpers.dto;
 
-import fr.aelion.models.course.Media;
+import fr.aelion.helpers.dto.annotations.ClassInitial;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 
 public class DtoMapper {
     /**
@@ -17,9 +17,6 @@ public class DtoMapper {
     public Object map(Object m, Object dto) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         // Introspect a class to get declared fields
         Field[] oFields = dto.getClass().getDeclaredFields();
-        // Field title + Field duration
-
-        // Introspect dto class to get declared fields
 
         // Sets a String array (property names)
         String[] properties = new String[oFields.length];
@@ -30,35 +27,28 @@ public class DtoMapper {
             properties[i] = oField.getName();
             i++;
         }
-        // String "title" + String "duration"
-
-        // How to invoke dynamically a getter from a class ?
-        // How to set dynamically an attribute of a class form a getter from another class ?
-        // dto.fieldName = m.getFieldName();
 
 
         // Loop over properties
-        // occ1 : property <- title
-        // occ2 : property <- duration
         i = 0;
         for (String property : properties) {
-            // Create a String that represents the get method of m Object
-            String getter = "get" + property.substring(0, 1).toUpperCase() + property.substring(1);
-            // occ1 : getter <- getTitle
-            // occ2 : getter <- getDuration
-            Method method = m.getClass().getSuperclass().getDeclaredMethod(getter, null);
-            // Set the same property in dto from getter of m Object
-            oFields[i].set(dto, method.invoke(m, null));
-            // dto.title = video.getTitle()
-            // dto.duration = video.getDuration()
+            Annotation annotation = oFields[i].getAnnotation(ClassInitial.class);
+            if (annotation == null) {
+                // Create a String that represents the get method of m Object
+                String getter = "get" + property.substring(0, 1).toUpperCase() + property.substring(1);
+                // occ1 : getter <- getTitle
+                // occ2 : getter <- getDuration
+                Method method = m.getClass().getSuperclass().getDeclaredMethod(getter, null);
+                // Set the same property in dto from getter of m Object
+                oFields[i].set(dto, method.invoke(m, null));
+            } else {
+                // Initial annotation is present so do the job
+                String initial = m.getClass().getSimpleName().substring(0, 1);
+                oFields[i].set(dto, initial);
+            }
+
             i++;
         }
-
-        /**
-         * for (int i = 0; i < properties.length; i++) {
-         *  String property = properties[i];
-         * }
-         */
         return dto;
     }
 }
