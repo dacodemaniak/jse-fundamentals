@@ -32,7 +32,7 @@ public class CourseRun {
                 .author(new Author());
 
         MediaBuilder slideBuilder = new VideoBuilder();
-        slideBuilder.setMediaType("slide");
+        slideBuilder.setMediaType("video");
         slideBuilder
                 .title("Alter table")
                 .summary("Modifier une table")
@@ -40,7 +40,7 @@ public class CourseRun {
                 .author(new Author());
 
         MediaBuilder docBuilder = new VideoBuilder();
-        docBuilder.setMediaType("document");
+        docBuilder.setMediaType("video");
         docBuilder
                 .title("Drop table")
                 .summary("Supprimer une table")
