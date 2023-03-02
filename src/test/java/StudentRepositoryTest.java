@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class StudentRepositoryTest {
     StudentRepository studentRepository;
     @BeforeEach
@@ -34,6 +34,42 @@ public class StudentRepositoryTest {
                 () -> assertEquals("Adam", student.getLastName()),
                 () -> assertEquals(17, student.getId()),
                 () -> assertEquals("Xavière", student.getFirstName())
+        );
+    }
+
+    @Test
+    @DisplayName("Student should be found with credentials : 'Blanchard.Sylvain' and 'aKAtVbCPtniTELjbMfnT'")
+    void shouldBeFound() throws StudentException, SQLException {
+        Student student = studentRepository.findByLoginAndPassword("Blanchard.Sylvain", "aKAtVbCPtniTELjbMfnT");
+        assertTrue(student instanceof Student);
+    }
+
+    @Test
+    @DisplayName("Should raised an exception if bad credentials")
+    void shouldRaisedAnException() {
+        assertThrows(
+                StudentException.class,
+                () -> studentRepository.findByLoginAndPassword("Aubert", "jlaubert")
+        );
+    }
+
+    @Test
+    @DisplayName("Shoud find a Student with id '53'")
+    void shouldGetStudentById() throws StudentException, SQLException {
+        Student student = studentRepository.find(53);
+        assertAll(
+                () -> assertTrue(student instanceof Student),
+                () -> assertEquals("Perez", student.getLastName())
+        );
+    }
+
+    @Test
+    @DisplayName("Should raised a NotFoundException with id 200")
+    void shouldNotFoundStudentWithId() throws StudentException, SQLException {
+
+        assertThrows(
+                StudentException.class,
+                () -> studentRepository.find(200)
         );
     }
 }

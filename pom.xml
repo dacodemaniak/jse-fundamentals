@@ -35,6 +35,13 @@
             <artifactId>postgresql</artifactId>
             <version>42.5.4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
     </dependencies>
 </project>
 

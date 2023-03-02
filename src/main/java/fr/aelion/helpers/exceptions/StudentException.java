@@ -20,4 +20,8 @@ public class StudentException extends Exception {
     public static StudentException noPasswordException() {
         return new StudentException("No password was provided");
     }
+
+    public static StudentException studentNotFoundException() {
+        return new StudentException("No Student found");
+    }
 }
