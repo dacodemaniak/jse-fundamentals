@@ -78,7 +78,10 @@ public class StudentBuilder implements Builder<Student> {
         }
 
         // Make the Student
-        Student student = new Student(this.lastName, this.firstName, this.email);
+        Student student = new Student();
+        student.setLastName(this.lastName);
+        student.setFirstName(this.firstName);
+        student.setEmail(this.email);
         student.setUsername(this.username);
         student.setPassword(this.password);
         student.setPhoneNumber(this.phoneNumber);
