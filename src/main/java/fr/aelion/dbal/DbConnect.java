@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public abstract class DbConnect {
+    /**
+     * Data Service Name (appplication.properties url)
+     */
     protected String dsn;
 
     protected String username;

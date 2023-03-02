@@ -8,8 +8,10 @@ import fr.aelion.services.courses.DisplayCourse;
 public class Main {
 
     public static void main(String[] args) {
-        StudentRun studentRun = new StudentRun();
-        studentRun.run();
+        String endPoint = "/api/v1/student";
+        String method = "GET";
+
+
     }
 
 }
