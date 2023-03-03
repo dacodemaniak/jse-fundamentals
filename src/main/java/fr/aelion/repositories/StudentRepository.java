@@ -30,7 +30,7 @@ public class StudentRepository extends Repository<Student> {
         ArrayList<Student> students = new ArrayList<>();
 
         // Need a SQL Query
-        String sqlQuery = getSelectQuery().substring(0, getSelectQuery().length() - 1) + " ORDER BY last_name, first_name";
+        String sqlQuery = getSelectQuery() + " ORDER BY last_name, first_name";
 
         // SELECT id, last_name, first_name, email, phone_number, login, password FROM student ORDER BY last_name, first_name;
         // Send sqlQuery to RDBMS => Need to create a Statement object
@@ -65,7 +65,7 @@ public class StudentRepository extends Repository<Student> {
     public Student findByLoginAndPassword(String login, String password) throws SQLException, StudentException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
-        String sqlQuery =  getSelectQuery().substring(0, getSelectQuery().length() - 1) + " WHERE login = ? AND password = ?;";
+        String sqlQuery =  getSelectQuery() + " WHERE login = ? AND password = ?;";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatement.setString(1, login);
@@ -99,7 +99,7 @@ public class StudentRepository extends Repository<Student> {
     public Student find(int id) throws SQLException, StudentException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
-        String sqlQuery = getSelectQuery().substring(0, getSelectQuery().length() - 1) + " WHERE id = ?;";
+        String sqlQuery = getSelectQuery() + " WHERE id = ?;";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatement.setInt(1, id);
