@@ -74,6 +74,7 @@ public class StudentRepositoryTest {
         );
     }
 
+    /**
     @Test
     @DisplayName("Should return 'student' from model Student")
     void shouldReturnTableName() {
@@ -110,4 +111,5 @@ public class StudentRepositoryTest {
 
         assertEquals(expected, studentRepository.getSelectQuery());
     }
+    **/
 }

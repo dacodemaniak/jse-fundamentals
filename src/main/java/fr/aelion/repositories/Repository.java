@@ -16,15 +16,15 @@ public abstract class Repository<T> {
         this.model = className;
         this.simpleName = model.getSimpleName().toLowerCase();
     }
-    public String getTableName() {
+    protected String getTableName() {
         return simpleName.toLowerCase();
     }
 
-    public String getAliasedTableName() {
+    protected String getAliasedTableName() {
         return simpleName + " " + simpleName.substring(0,1);
     }
 
-    public String[] getFields() {
+    protected String[] getFields() {
         var current = model;
         var stringFields = new ArrayList<String>();
         while(current.getSuperclass() != null) {
@@ -43,7 +43,7 @@ public abstract class Repository<T> {
         return stringFields.toArray(new String[0]);
     }
 
-    public String getCommaSeparatedColumns() {
+    protected String getCommaSeparatedColumns() {
         String[] fieldNames = this.getFields();
 
         String[] columnNames = Arrays.stream(fieldNames)
@@ -56,7 +56,7 @@ public abstract class Repository<T> {
         return String.join(",", columnNames);
     }
 
-    public String getSelectQuery() {
+    protected String getSelectQuery() {
         return "SELECT " + getCommaSeparatedColumns() + " FROM " + simpleName + " " + simpleName.substring(0, 1) + ";";
     }
 }
