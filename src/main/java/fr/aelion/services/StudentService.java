@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class StudentService {
-    private StudentRepository studentRepository = new StudentRepository();
+    private StudentRepository studentRepository = new StudentRepository(Student.class);
 
     public StudentService() throws StudentException {
     }

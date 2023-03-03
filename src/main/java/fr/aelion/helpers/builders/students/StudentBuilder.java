@@ -82,7 +82,7 @@ public class StudentBuilder implements Builder<Student> {
         student.setLastName(this.lastName);
         student.setFirstName(this.firstName);
         student.setEmail(this.email);
-        student.setUsername(this.username);
+        student.setLogin(this.username);
         student.setPassword(this.password);
         student.setPhoneNumber(this.phoneNumber);
 

@@ -8,7 +8,7 @@ public class LoginManager {
     private String login;
     private String password;
 
-    private StudentRepository studentRepository = new StudentRepository();
+    private StudentRepository studentRepository = new StudentRepository(Student.class);
     public LoginManager(String login, String password) throws StudentException {
         this.login = login;
         this.password = password;
