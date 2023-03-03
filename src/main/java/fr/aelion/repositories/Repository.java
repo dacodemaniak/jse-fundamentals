@@ -47,7 +47,7 @@ public abstract class Repository<T> {
         String[] fieldNames = this.getFields();
 
         String[] columnNames = Arrays.stream(fieldNames)
-                .map(f -> simpleName.substring(0, 1) + "." + CaseConverter.camelToSnake(f))
+                .map(f -> simpleName.substring(0, 1) + "." + CaseConverter.camelToSnake(f) + " " + f)
                 .collect(Collectors.toList())
                 .toArray(new String[0]);
 
