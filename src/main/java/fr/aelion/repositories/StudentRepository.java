@@ -2,25 +2,25 @@ package fr.aelion.repositories;
 
 import fr.aelion.dbal.DbConnect;
 import fr.aelion.dbal.postgres.PgConnect;
-import fr.aelion.helpers.builders.students.StudentBuilder;
 import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 
-import java.security.spec.NamedParameterSpec;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentRepository {
+public class StudentRepository extends Repository<Student> {
 
     /**
      * Connection Instance to our RDBMS
      */
     private DbConnect dbConnect;
 
-    public StudentRepository() throws StudentException {
+    public StudentRepository(Class<Student> className) throws StudentException {
+        super(className); // Ref to Parent constructor
         this.dbConnect = PgConnect.getInstance();
     }
+
 
     /**
      *
@@ -47,7 +47,7 @@ public class StudentRepository {
             student.setFirstName(resultSet.getString("first_name"));
             student.setEmail(resultSet.getString("email"));
             student.setPhoneNumber(resultSet.getString("phone_number"));
-            student.setUsername(resultSet.getString("login"));
+            student.setLogin(resultSet.getString("login"));
             student.setPassword(resultSet.getString("password"));
 
             // Add brand new Student object to the ArrayList
@@ -65,8 +65,7 @@ public class StudentRepository {
     public Student findByLoginAndPassword(String login, String password) throws SQLException, StudentException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
-        String sqlQuery = "SELECT id, last_name, first_name, email, phone_number, login, password ";
-        sqlQuery += "FROM student WHERE login = ? AND password = ?;";
+        String sqlQuery = "SELECT id, last_name, first_name, email, phone_number, login, password FROM student WHERE login = ? AND password = ?;";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatement.setString(1, login);
@@ -82,7 +81,7 @@ public class StudentRepository {
             student.setFirstName(resultSet.getString("first_name"));
             student.setEmail(resultSet.getString("email"));
             student.setPhoneNumber(resultSet.getString("phone_number"));
-            student.setUsername(resultSet.getString("login"));
+            student.setLogin(resultSet.getString("login"));
             student.setPassword(resultSet.getString("password"));
 
             preparedStatement.close();
@@ -107,6 +106,9 @@ public class StudentRepository {
         preparedStatement.setInt(1, id);
 
         ResultSet resultSet = preparedStatement.executeQuery();
+        Cursor cursor = new Cursor();
+        cursor.setResultSet(resultSet);
+
 
         if (resultSet.next()) {
             Student student = new Student();
@@ -116,7 +118,7 @@ public class StudentRepository {
             student.setFirstName(resultSet.getString("first_name"));
             student.setEmail(resultSet.getString("email"));
             student.setPhoneNumber(resultSet.getString("phone_number"));
-            student.setUsername(resultSet.getString("login"));
+            student.setLogin(resultSet.getString("login"));
             student.setPassword(resultSet.getString("password"));
 
             preparedStatement.close();
@@ -153,7 +155,7 @@ public class StudentRepository {
                 student.setFirstName(resultSet.getString("first_name"));
                 student.setEmail(resultSet.getString("email"));
                 student.setPhoneNumber(resultSet.getString("phone_number"));
-                student.setUsername(resultSet.getString("login"));
+                student.setLogin(resultSet.getString("login"));
                 student.setPassword(resultSet.getString("password"));
 
                 return student;
