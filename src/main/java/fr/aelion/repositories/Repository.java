@@ -56,7 +56,7 @@ public abstract class Repository<T> {
         return String.join(",", columnNames);
     }
 
-    protected String getSelectQuery() {
+    public String getSelectQuery() {
         return "SELECT " + getCommaSeparatedColumns() + " FROM " + simpleName + " " + simpleName.substring(0, 1);
     }
 }

@@ -1,6 +1,7 @@
 package fr.aelion.repositories;
 
 import fr.aelion.dbal.DbConnect;
+import fr.aelion.dbal.builder.QueryBuilder;
 import fr.aelion.dbal.mapper.EntityMapper;
 import fr.aelion.dbal.postgres.PgConnect;
 import fr.aelion.helpers.exceptions.StudentException;
@@ -19,6 +20,8 @@ public class StudentRepository extends Repository<Student> {
     private DbConnect dbConnect;
     private EntityMapper entityMapper;
 
+    private QueryBuilder queryBuilder;
+
     public StudentRepository(Class<Student> className) throws StudentException {
         super(className); // Ref to Parent constructor
         this.dbConnect = PgConnect.getInstance();
@@ -33,8 +36,13 @@ public class StudentRepository extends Repository<Student> {
     public List<Student> findAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         ArrayList<Student> students = new ArrayList<>();
 
+        queryBuilder = new QueryBuilder(this);
+        queryBuilder
+                .select()
+                .order("lastName")
+                .order("firstName");
         // Need a SQL Query
-        String sqlQuery = getSelectQuery() + " ORDER BY last_name, first_name";
+        String sqlQuery = queryBuilder.build();
 
         // Send sqlQuery to RDBMS => Need to create a Statement object
         Connection connection = this.dbConnect.connect();
@@ -57,7 +65,13 @@ public class StudentRepository extends Repository<Student> {
     public Student findByLoginAndPassword(String login, String password) throws SQLException, StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
-        String sqlQuery =  getSelectQuery() + " WHERE login = ? AND password = ?;";
+        queryBuilder = new QueryBuilder(this);
+        queryBuilder
+                .select()
+                .where("login")
+                .andWhere("password");
+        // Need a SQL Query
+        String sqlQuery = queryBuilder.build();
 
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatement.setString(1, login);
@@ -83,7 +97,12 @@ public class StudentRepository extends Repository<Student> {
     public Student find(int id) throws SQLException, StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
-        String sqlQuery = getSelectQuery() + " WHERE id = ?;";
+        queryBuilder = new QueryBuilder(this);
+        queryBuilder
+                .select()
+                .where("id");
+        // Need a SQL Query
+        String sqlQuery = queryBuilder.build();
 
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatement.setInt(1, id);
