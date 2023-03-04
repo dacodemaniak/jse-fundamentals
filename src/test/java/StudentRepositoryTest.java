@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -20,14 +21,14 @@ public class StudentRepositoryTest {
 
     @Test
     @DisplayName("Student list should have 100 elements")
-    public void studentInstanciationTest() throws SQLException {
+    public void studentInstanciationTest() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<Student> students = studentRepository.findAll();
         assertEquals(100, students.size());
     }
 
     @Test
     @DisplayName("Should have Adam Xavière 17 as first result")
-    public void firstStudentMustMatch() throws SQLException {
+    public void firstStudentMustMatch() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<Student> students = studentRepository.findAll();
         Student student = students.get(0);
 
@@ -40,7 +41,7 @@ public class StudentRepositoryTest {
 
     @Test
     @DisplayName("Student should be found with credentials : 'Blanchard.Sylvain' and 'aKAtVbCPtniTELjbMfnT'")
-    void shouldBeFound() throws StudentException, SQLException {
+    void shouldBeFound() throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Student student = studentRepository.findByLoginAndPassword("Blanchard.Sylvain", "aKAtVbCPtniTELjbMfnT");
         assertTrue(student instanceof Student);
     }
@@ -56,7 +57,7 @@ public class StudentRepositoryTest {
 
     @Test
     @DisplayName("Shoud find a Student with id '53'")
-    void shouldGetStudentById() throws StudentException, SQLException {
+    void shouldGetStudentById() throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Student student = studentRepository.find(53);
         assertAll(
                 () -> assertTrue(student instanceof Student),

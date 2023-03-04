@@ -4,6 +4,7 @@ import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 import fr.aelion.repositories.StudentRepository;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,15 +14,15 @@ public class StudentService {
     public StudentService() throws StudentException {
     }
 
-    public List<Student> findAll() throws SQLException {
+    public List<Student> findAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return this.studentRepository.findAll();
     }
 
-    public Student findById(int id) throws StudentException, SQLException {
+    public Student findById(int id) throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return this.studentRepository.find(id);
     }
 
-    public Student byLoginAndPassword(String login, String password) throws StudentException, SQLException {
+    public Student byLoginAndPassword(String login, String password) throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return this.studentRepository.findByLoginAndPassword(login, password);
     }
 }
