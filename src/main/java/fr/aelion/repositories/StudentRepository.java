@@ -34,7 +34,7 @@ public class StudentRepository extends Repository<Student> {
      *
      * @return List of Students of our DB
      */
-    public List<Student> findAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public List<Student> findAll() throws SQLException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InstantiationException {
         ArrayList<Student> students = new ArrayList<>();
 
         queryBuilder = new QueryBuilder(this);
@@ -95,7 +95,7 @@ public class StudentRepository extends Repository<Student> {
         throw StudentException.studentNotFoundException();
     }
 
-    public Student findById(int id) throws SQLException, StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Student findById(int id) throws StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
         queryBuilder = new QueryBuilder(this);
