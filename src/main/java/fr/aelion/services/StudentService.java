@@ -19,7 +19,7 @@ public class StudentService {
     }
 
     public Student findById(int id) throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return this.studentRepository.find(id);
+        return this.studentRepository.findById(id);
     }
 
     public Student byLoginAndPassword(String login, String password) throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {

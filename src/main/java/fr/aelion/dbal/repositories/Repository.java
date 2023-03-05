@@ -1,4 +1,4 @@
-package fr.aelion.repositories;
+package fr.aelion.dbal.repositories;
 
 import fr.aelion.helpers.CaseConverter;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class Repository<T> {
+public abstract class Repository<T> implements IRepository<T> {
     private Class<T> model;
     private String simpleName;
 

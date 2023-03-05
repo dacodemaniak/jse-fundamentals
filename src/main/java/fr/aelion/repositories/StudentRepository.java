@@ -4,6 +4,7 @@ import fr.aelion.dbal.DbConnect;
 import fr.aelion.dbal.builder.QueryBuilder;
 import fr.aelion.dbal.mapper.EntityMapper;
 import fr.aelion.dbal.postgres.PgConnect;
+import fr.aelion.dbal.repositories.Repository;
 import fr.aelion.helpers.exceptions.StudentException;
 import fr.aelion.models.Student;
 
@@ -94,7 +95,7 @@ public class StudentRepository extends Repository<Student> {
         throw StudentException.studentNotFoundException();
     }
 
-    public Student find(int id) throws SQLException, StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Student findById(int id) throws SQLException, StudentException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Connection connection = dbConnect.connect();
         // Need a SQL Query
         queryBuilder = new QueryBuilder(this);

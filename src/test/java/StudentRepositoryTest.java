@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,7 +57,7 @@ public class StudentRepositoryTest {
     @Test
     @DisplayName("Shoud find a Student with id '53'")
     void shouldGetStudentById() throws StudentException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        Student student = studentRepository.find(53);
+        Student student = studentRepository.findById(53);
         assertAll(
                 () -> assertTrue(student instanceof Student),
                 () -> assertEquals("Perez", student.getLastName())
@@ -71,7 +70,7 @@ public class StudentRepositoryTest {
 
         assertThrows(
                 StudentException.class,
-                () -> studentRepository.find(200)
+                () -> studentRepository.findById(200)
         );
     }
 }
